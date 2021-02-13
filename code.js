@@ -1,10 +1,14 @@
 const cardNum = document.getElementById('Credit Card Number')
 const form = document.getElementById('form')
 const error1 = document.getElementById('error')
+const success1 = document.getElementById('success')
 
 form.addEventListener('submit', (e) =>
  {
     let messages = []
+    error1.innerText=''
+    success1.innerText=''
+
     if(!isNumber(cardNum.value))
     {
         messages.push('Must be a number')
@@ -12,10 +16,10 @@ form.addEventListener('submit', (e) =>
 
     else if((cardNum.value + '').length < 13 || (cardNum.value + '').length > 16)
     {
-        messages.push('Card number 13-16 characters long')
+        messages.push('Number must be 13-16 characters long')
     }
 
-    if(isNumber(cardNum.value))
+    else if(isNumber(cardNum.value))
     {
         //let intCard = parseInt(cardNum.value)
         if(!isCardNumber(cardNum.value))
@@ -28,6 +32,12 @@ form.addEventListener('submit', (e) =>
     {
         e.preventDefault()
         error1.innerText=messages.join(', ') 
+    }
+    else
+    {
+        e.preventDefault()
+        error1.innerText=''
+        success1.innerText='Success!'
     }
 })
 
